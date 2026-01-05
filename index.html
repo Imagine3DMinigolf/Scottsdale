@@ -4,37 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store Reporting Tool</title>
+
     <style>
         :root {
             --primary: #2c3e50;
             --accent: #3498db;
             --bg: #f0f2f5;
         }
-        body { font-family: -apple-system, sans-serif; background: var(--bg); padding: 15px; margin: 0; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        
-        h2 { text-align: center; color: var(--primary); margin-bottom: 5px; }
-        .loc-tag { text-align: center; color: var(--accent); font-weight: bold; margin-bottom: 20px; }
-        
-        .section-label { font-size: 0.8em; color: #888; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        
-        .row { display: flex; align-items: center; margin-bottom: 12px; }
-        .row label { flex: 1; font-weight: 500; color: #333; }
-        .row input { width: 70px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; font-size: 16px; }
-        .row input:focus { border-color: var(--accent); outline: none; }
-        .subtotal { width: 70px; text-align: right; color: #888; font-family: monospace; }
 
-        .type-selector { display: flex; gap: 10px; margin-bottom: 20px; }
-        .type-btn { flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 6px; background: white; cursor: pointer; font-weight: bold; color: #666; }
-        .type-btn.active { border-color: var(--accent); background: #ebf5fb; color: var(--accent); }
+        body {
+            font-family: -apple-system, sans-serif;
+            background: var(--bg);
+            padding: 15px;
+            margin: 0;
+        }
 
-        .total-card { background: var(--primary); color: white; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center; }
-        .total-val { font-size: 2em; font-weight: bold; display: block; }
-        
-        .submit-btn { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 1.1em; font-weight: bold; margin-top: 15px; cursor: pointer; }
-        .submit-btn:active { transform: scale(0.98); }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .loc-tag {
+            text-align: center;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-size: 0.8em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 0 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .row label {
+            flex: 1;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .row input {
+            width: 70px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .row input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .subtotal {
+            width: 70px;
+            text-align: right;
+            color: #888;
+            font-family: monospace;
+        }
+
+        .type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .type-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .type-btn.active {
+            border-color: var(--accent);
+            background: #ebf5fb;
+            color: var(--accent);
+        }
+
+        .total-card {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .total-val {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -52,47 +158,53 @@
     </div>
 
     <div class="section-label">Cash Count</div>
-    
+
     <div class="row">
         <label>$20 Bills</label>
-        <input type="number" class="denom" data-multiplier="20" value="0" inputmode="numeric">
-        <div class="subtotal">$0</div>
+        <input type="number" class="denom" data-multiplier="20" value="0">
+        <div class="subtotal">$0.00</div>
     </div>
+
     <div class="row">
         <label>$10 Bills</label>
-        <input type="number" class="denom" data-multiplier="10" value="0" inputmode="numeric">
-        <div class="subtotal">$0</div>
+        <input type="number" class="denom" data-multiplier="10" value="0">
+        <div class="subtotal">$0.00</div>
     </div>
+
     <div class="row">
         <label>$5 Bills</label>
-        <input type="number" class="denom" data-multiplier="5" value="0" inputmode="numeric">
-        <div class="subtotal">$0</div>
+        <input type="number" class="denom" data-multiplier="5" value="0">
+        <div class="subtotal">$0.00</div>
     </div>
+
     <div class="row">
         <label>$1 Bills</label>
-        <input type="number" class="denom" data-multiplier="1" value="0" inputmode="numeric">
-        <div class="subtotal">$0</div>
+        <input type="number" class="denom" data-multiplier="1" value="0">
+        <div class="subtotal">$0.00</div>
     </div>
+
     <div class="row">
         <label>Quarters</label>
-        <input type="number" class="denom" data-multiplier="0.25" value="0" inputmode="numeric">
-        <div class="subtotal">$0</div>
+        <input type="number" class="denom" data-multiplier="0.25" value="0">
+        <div class="subtotal">$0.00</div>
     </div>
+
     <div class="row">
         <label>Dimes</label>
-        <input type="number" class="denom" data-multiplier="0.10" value="0" inputmode="numeric">
-        <div class="subtotal">$0</div>
+        <input type="number" class="denom" data-multiplier="0.10" value="0">
+        <div class="subtotal">$0.00</div>
     </div>
+
     <div class="row">
         <label>Nickels</label>
-        <input type="number" class="denom" data-multiplier="0.05" value="0" inputmode="numeric">
-        <div class="subtotal">$0</div>
+        <input type="number" class="denom" data-multiplier="0.05" value="0">
+        <div class="subtotal">$0.00</div>
     </div>
 
     <div class="section-label">Inventory</div>
     <div class="row">
         <label>3D Glasses In Stock</label>
-        <input type="number" id="glasses" value="0" inputmode="numeric">
+        <input type="number" id="glasses" value="0">
     </div>
 
     <div class="total-card">
@@ -104,76 +216,83 @@
 </div>
 
 <script>
-    // 1. Get the location from the URL (e.g., yoursite.com?loc=Scottsdale)
-const urlParams = new URLSearchParams(window.location.search);
-let loc = urlParams.get('loc') || "Scottsdale"; // Defaults to Scottsdale if no param found
+    const urlParams = new URLSearchParams(window.location.search);
+    const loc = urlParams.get('loc') || "Scottsdale";
+    document.getElementById('locDisplay').innerText = "Location: " + loc;
 
-// 2. Update the Display Title
-document.getElementById('locDisplay').innerText = "Location: " + loc;
+    let currentType = 'OPEN';
 
-let currentType = 'OPEN';
-
-function setType(type, btn) {
-    currentType = type;
-    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-}
-
-// Live Calculation Logic (Bills & Coins)
-const inputs = document.querySelectorAll('.denom');
-inputs.forEach(input => {
-    input.addEventListener('input', () => {
-        let total = 0;
-        inputs.forEach(i => {
-            const count = parseFloat(i.value) || 0;
-            const mult = parseFloat(i.dataset.multiplier);
-            const sub = count * mult;
-            total += sub;
-            i.nextElementSibling.innerText = '$' + sub.toFixed(2);
-        });
-        document.getElementById('grandTotal').innerText = '$' + total.toFixed(2);
-    });
-});
-
-async function submitToSheet() {
-    // PASTE YOUR GOOGLE URL HERE
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwlKnS76r87TTbXujswdy7ocpD9J2P3aUXJwEgb7sJt8q8OgnFyn0e8JQ4wbsiwuZ3TNw/exec";
-    
-    const staff = document.getElementById('staff').value;
-    const glasses = document.getElementById('glasses').value;
-    if(!staff) { alert("Please enter your name"); return; }
-
-    const denoms = document.querySelectorAll('.denom');
-    const payload = {
-        location: loc, // Sends "Scottsdale" or "Gilbert"
-        type: currentType,
-        staff: staff,
-        twenties: denoms[0].value,
-        tens: denoms[1].value,
-        fives: denoms[2].value,
-        ones: denoms[3].value,
-        quarters: denoms[4].value,
-        dimes: denoms[5].value,
-        nickels: denoms[6].value,
-        total: document.getElementById('grandTotal').innerText,
-        glasses: glasses
-    };
-
-    try {
-        await fetch(scriptURL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(payload)
-        });
-        alert("Success! " + currentType + " entry recorded for " + loc);
-        location.reload(); 
-    } catch (error) {
-        alert("Error submitting data.");
+    function setType(type, btn) {
+        currentType = type;
+        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
     }
-}
+
+    const inputs = document.querySelectorAll('.denom');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            let total = 0;
+            inputs.forEach(i => {
+                const count = parseFloat(i.value) || 0;
+                const mult = parseFloat(i.dataset.multiplier);
+                const sub = count * mult;
+                total += sub;
+                i.nextElementSibling.innerText = '$' + sub.toFixed(2);
+            });
+            document.getElementById('grandTotal').innerText = '$' + total.toFixed(2);
+        });
+    });
+
+    async function submitToSheet() {
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwlKnS76r87TTbXujswdy7ocpD9J2P3aUXJwEgb7sJt8q8OgnFyn0e8JQ4wbsiwuZ3TNw/exec";
+
+        const staff = document.getElementById('staff').value.trim();
+        const glasses = document.getElementById('glasses').value;
+
+        if (!staff) {
+            alert("Please enter your name");
+            return;
+        }
+
+        const denoms = document.querySelectorAll('.denom');
+
+        const payload = {
+            location: loc,
+            type: currentType,
+            staff: staff,
+            twenties: denoms[0].value,
+            tens: denoms[1].value,
+            fives: denoms[2].value,
+            ones: denoms[3].value,
+            quarters: denoms[4].value,
+            dimes: denoms[5].value,
+            nickels: denoms[6].value,
+            total: document.getElementById('grandTotal').innerText,
+            glasses: glasses
+        };
+
+        try {
+            await fetch(scriptURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            alert(`Success! ${currentType} entry recorded for ${loc}`);
+            location.reload();
+
+        } catch (err) {
+            alert("Submission failed. Please try again.");
+            console.error(err);
+        }
+    }
 </script>
 
 </body>
+</html>
+
 
 </html>
+
 
