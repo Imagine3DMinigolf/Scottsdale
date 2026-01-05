@@ -272,23 +272,25 @@
             glasses: glasses
         };
 
-        try {
-            await fetch(scriptURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+ const formData = new URLSearchParams(payload);
 
-            alert(`Success! ${currentType} entry recorded for ${loc}`);
-            location.reload();
+try {
+    await fetch(scriptURL, {
+        method: 'POST',
+        body: formData
+    });
 
-        } catch (err) {
-            alert("Submission failed. Please try again.");
-            console.error(err);
-        }
+    alert(`Success! ${currentType} entry recorded for ${loc}`);
+    location.reload();
+
+} catch (err) {
+    alert("Submission failed. Please notify a manager.");
+    console.error(err);
+}
     }
 </script>
 
 </body>
 </html>
+
 
